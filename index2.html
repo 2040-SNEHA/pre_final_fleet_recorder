@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fleet - Web_Tracker_Recording</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fleet - Web_Tracker</h1>
+
+        <input type="submit" value="Start Recording">
+        <!-- <input type="press" value="Stop Recording"> -->
+        <!-- <input type="press1" value="View JSON"> -->
+
+        <button id="baba" onclick="displayMessages()">View JSON</button>
+
+        <!-- Log container to display messages -->
+        <div id="logContainer" class="json-container"></div>
+        
+        <!-- Add your other HTML elements here -->
+       
+        <script>
+            // Array to store all the JSON messages
+            const messagesList = [];
+            
+            // Function to append the JSON data to the log container and store it in messagesList
+            function printToConsole(message) {
+                // Store the message as JSON in the messagesList array
+                messagesList.push(JSON.parse(message));
+            }
+            
+            // Function to display the stored JSON data when the "View JSON" button is clicked
+            function displayMessages() {
+                const logContainer = document.getElementById('logContainer');
+                // Clear the log container first
+                logContainer.innerHTML = '';
+
+                // Create an unordered list to display the messages as a list
+                const ul = document.createElement('ul');
+
+                // Create and append list items for each stored message in messagesList
+                messagesList.forEach((message) => {
+                    const li = document.createElement('li');
+                    li.textContent = JSON.stringify(message, null, 2);
+                    ul.appendChild(li);
+                });
+
+                // Append the unordered list to the log container
+                logContainer.appendChild(ul);
+            }
+        </script>
+    </div>
+</body>
+</html>
